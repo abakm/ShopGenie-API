@@ -1,6 +1,5 @@
 import uvicorn
 from json import dumps
-from uuid import uuid4
 from fastapi import FastAPI, Response
 
 from common import PayloadTemplate, query_db
@@ -11,7 +10,8 @@ app = FastAPI()
 @app.post('/api/post')
 def search(payload: PayloadTemplate):
     payload = payload.dict()
-    query_id = str(uuid4())
+    query_ids = query_db.distinct("_id")
+    query_id = max(query_ids)+1 if query_ids else 1
     query_db.insert_one(dict(_id=query_id, query=payload["query"], email=payload["email"], status="searching",
                              result=None))
 
@@ -22,7 +22,7 @@ def search(payload: PayloadTemplate):
 
 
 @app.post('/api/get/{query_id}')
-def get(query_id: str):
+def get(query_id: int):
     print(query_id)
     query = query_db.find_one({"_id": query_id})
     status_code = 200 if query else 404
