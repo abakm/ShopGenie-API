@@ -9,7 +9,7 @@ app = FastAPI()
 
 @app.post('/api/post')
 def search(payload: PayloadTemplate):
-    payload = payload.dict()
+    payload = payload.model_dump()
     query_ids = query_db.distinct("_id")
     query_id = max(query_ids)+1 if query_ids else 1
     query_db.insert_one(dict(_id=query_id, query=payload["query"], email=payload["email"], status="searching",
