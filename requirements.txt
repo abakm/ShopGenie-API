@@ -8,3 +8,11 @@ email-validator>=2.0.0
 
 # MongoDB driver
 pymongo==4.13.2
+
+
+langchain-groq==0.3.6
+langgraph==0.5.4
+tavily-python
+google-api-python-client
+langchain-community==0.3.27
+beautifulsoup4==4.13.4
