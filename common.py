@@ -1,6 +1,6 @@
+from groq import Groq
 from pymongo import MongoClient
 from langchain_groq import ChatGroq
-from groq import Groq
 from typing_extensions import TypedDict
 from googleapiclient.discovery import build
 from langchain_community.document_loaders import WebBaseLoader
@@ -37,5 +37,3 @@ def load_url_content(url: str):
     documents = loader.load()
     documents = " ".join([document.page_content for document in documents])
     return documents
-
-
