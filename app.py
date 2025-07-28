@@ -2,8 +2,8 @@ import uvicorn
 from json import dumps
 from fastapi import FastAPI, Response
 
-from common import PayloadTemplate, query_db
-
+from common import query_db
+from models import  PayloadTemplate
 app = FastAPI()
 
 
