@@ -6,7 +6,7 @@ mongodb 8.0.12 https://www.mongodb.com/try/download/community
 
 
 
-GROQ API Key:
+GROQ API Key: # Expires within 24 hrs
 1. Go to console.groq.com.
 2. Sign up or log in.
 3. Navigate to the "API Keys" section.
