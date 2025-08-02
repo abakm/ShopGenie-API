@@ -1,24 +1,24 @@
 import os
-from tavily import TavilyClient, InvalidAPIKeyError, UsageLimitExceededError
+from tavily import InvalidAPIKeyError, UsageLimitExceededError
 
-from common import load_url_content
+
+from models import State
+from common import query_db
+from graph import tavily_client, load_url_content
+
 os.environ["USER_AGENT"] = "Mozilla/5.0 (compatible; MyBot/1.0; +http://mywebsite.com/bot)"
 
-from common import query_db
 
-# Tavily for web search
-tavily_client = TavilyClient(api_key="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")
-
-
-def tavily_node(query_data):
-
+def tavily_node(state:State):
     try:
         search_contents = list()
-        response = tavily_client.search(query=query_data.get("query"), max_results=1)
+        query_db.update_one({"_id": state["query_id"]}, {"$set": {"status": "tavily searching"}})
+        response = tavily_client.search(query=state.get("query"), max_results=1)
         if "results" in response and response["results"]:
             for result in response["results"]:
                 url = result.get("url", "")
                 if url:
+                    query_db.update_one({"_id": state["query_id"]}, {"$set": {"status": "Load blog contents"}})
                     content = load_url_content(url=url)
                     if content:
                         search_contents.append({
@@ -28,7 +28,11 @@ def tavily_node(query_data):
                             "score": result.get("score", "")
                         })
 
+        else:
+            query_db.update_one({"_id": state["query_id"]}, {"$set": {"status": "No data found on tavily search"}})
+
     except (InvalidAPIKeyError, UsageLimitExceededError, Exception) as err:
+        query_db.update_one({"_id": state["query_id"]}, {"$set": {"status": f"Tavily search failed:{err}"}})
         search_contents = list()
 
     return dict(search_contents=search_contents)
