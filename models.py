@@ -60,7 +60,7 @@ class ComparisonTemplate(BaseModel):
 class EmailRecommendation(BaseModel):
     subject: str = Field(..., description="The email subject line, designed to capture the recipient's attention.")
     heading: str = Field(..., description="The main heading of the email, introducing the recommended product.")
-    justification_line: str = Field(..., description="A concise explanation of why the product is being recommended.")
+    justification: str = Field(..., description="A concise explanation of why the product is being recommended.")
 
 
 class State(TypedDict):

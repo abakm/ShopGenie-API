@@ -23,7 +23,7 @@ def search(payload: PayloadTemplate):
     )
 
 
-@app.post('/api/get/{query_id}')
+@app.get('/api/get/{query_id}')
 def get(query_id: int):
     query = query_db.find_one({"_id": query_id})
     status_code = 200 if query else 404
