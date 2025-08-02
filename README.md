@@ -29,11 +29,15 @@ YOUTUBE_API_KEY:
 
 API:http://0.0.0.0:5000/api/post
 METHOD: POST
+
 PAYLOAD: {"query": "Best laptops brands india","email":"asadsher2324@gmail.com"}
+
 RESPONSE: {"query_id": 5}
 
 API: http://0.0.0.0:5000/api/get/<query_id>  // http://0.0.0.0:5000/api/get/5
+
 METHOD: GET
+
 RESPONSE: {
   "_id": 7,
   "query": "Best smartwatches india",
