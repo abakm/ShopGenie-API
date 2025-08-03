@@ -40,7 +40,7 @@ def trigger_graph(query_id: int, query: str, email: str):
         print(event)
 
 
-# initial_state = {"query_id": 1, "query": "Best laptop brands in india", "email": "akhilakm@gmail.com"}
-#
-# for event in graph.stream(input=initial_state, stream_mode="updates"):
-#     print(event)
+initial_state = {"query_id": 1, "query": "Best smartphones under $1000", "email": "akhilakmgb@gmail.com"}
+
+for event in graph.stream(input=initial_state, stream_mode="updates"):
+    print(event)

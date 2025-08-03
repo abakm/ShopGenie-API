@@ -14,7 +14,7 @@ from models import State, EmailRecommendation
 SERVER = "smtp.gmail.com"
 PORT = 587
 MAIL = os.getenv("EMAIL_USERNAME", "akhilakmgb@gmail.com")
-PASSWORD = os.getenv("EMAIL_PASSWORD", "AkhilBakm@1997")
+PASSWORD = os.getenv("EMAIL_PASSWORD", "cqcc lhus jlnd ouii")
 
 email_html_template = """
             
@@ -88,6 +88,7 @@ def email_node(state: State):
                 youtube_link=youtube_link,
                 heading=response['heading']
             )
+            subject = response['subject']
         except OutputParserException:
             html_content = email_html_template.format(
                 product_name=best_product_name,
@@ -95,6 +96,7 @@ def email_node(state: State):
                 youtube_link=youtube_link,
                 heading=f"ShopGenie Recommendation for the query: {state['query']}"
             )
+            subject = "ShopGenie Recommendations"
 
 
         try:
@@ -102,7 +104,7 @@ def email_node(state: State):
             message = MIMEMultipart()
             message['From'] = MAIL
             message['To'] = state['email']
-            message['Subject'] = response['subject'],
+            message['Subject'] = subject
 
             # Add the email body
             message.attach(MIMEText(html_content, 'html'))
