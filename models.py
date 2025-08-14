@@ -22,9 +22,11 @@ class ProductTemplate(BaseModel):
     brand: Optional[str] = Field(None, description="Brand or manufacturer of the product")
     category: Optional[str] = Field(None, description="Product category or type")
 
+
 class ListProductTemplate(BaseModel):
     """A list of product reviews/analyses."""
     products: List[ProductTemplate] = Field(..., description="List of individual product reviews/analyses")
+
 
 class SimpleRatings(BaseModel):
     """Simple ratings structure."""

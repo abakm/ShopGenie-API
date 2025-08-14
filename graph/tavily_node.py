@@ -15,18 +15,22 @@ def tavily_node(state:State):
         query_db.update_one({"_id": state["query_id"]}, {"$set": {"status": "tavily searching"}})
         response = tavily_client.search(query=state.get("query"), max_results=1)
         if "results" in response and response["results"]:
-            for result in response["results"]:
-                url = result.get("url", "")
-                if url:
-                    query_db.update_one({"_id": state["query_id"]}, {"$set": {"status": "Load blog contents"}})
-                    content = load_url_content(url=url)
-                    if content:
-                        search_contents.append({
-                            "title": result.get("title", ""),
-                            "url": url,
-                            "content": content,
-                            "score": result.get("score", "")
-                        })
+            print(len(response["results"]))
+            for index, result in enumerate(response["results"]):
+                print("INDEX: ", index)
+                score = result.get("score", 0)
+                if score >= 0.7:  # Only use highly relevant results
+                    url = result.get("url", "")
+                    if url:
+                        query_db.update_one({"_id": state["query_id"]}, {"$set": {"status": "Load blog contents"}})
+                        content = load_url_content(url=url)
+                        if content:
+                            search_contents.append({
+                                "title": result.get("title", ""),
+                                "url": url,
+                                "content": content,
+                                "score": result.get("score", "")
+                            })
 
         else:
             query_db.update_one({"_id": state["query_id"]}, {"$set": {"status": "No data found on tavily search"}})

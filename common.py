@@ -9,7 +9,7 @@ class State(TypedDict):
     youtube_link: str
 
 # Database connection
-connection = MongoClient("mongodb://localhost:27017/")
+connection = MongoClient("mongodb+srv://shopgenie:shopgenie@cluster0.2zydot4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 database = connection["ShopGenie"]
 query_db = database["query"]
 

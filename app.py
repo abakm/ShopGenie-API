@@ -2,6 +2,7 @@ import uvicorn
 from json import dumps
 from threading import Thread
 from fastapi import FastAPI, Response
+from fastapi.middleware.cors import CORSMiddleware
 
 
 from common import query_db
@@ -9,9 +10,17 @@ from models import PayloadTemplate
 from graph.workflow import trigger_graph
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Your React app URL
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
+
 
 @app.post('/api/post')
-def search(payload: PayloadTemplate):
+def post(payload: PayloadTemplate):
     payload = payload.model_dump()
     query_ids = query_db.distinct("_id")
     query_id = max(query_ids)+1 if query_ids else 1
