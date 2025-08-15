@@ -10,21 +10,24 @@ class PayloadTemplate(BaseModel):
 
 
 class ProductTemplate(BaseModel):
-    """A review/analysis of any product."""
+    """
+    A review/analysis of any product.
+    """
     title: str = Field(..., description="The title/name of the product")
     url: Optional[str] = Field(None, description="The URL of the product review or source")
     content: Optional[str] = Field(None, description="The main content/summary of the product")
     pros: Optional[List[str]] = Field(None, description="The advantages/positive aspects of the product")
     cons: Optional[List[str]] = Field(None, description="The disadvantages/negative aspects of the product")
-    highlights: Optional[Dict[str, Any]] = Field(None, description="Key features, specifications, or notable aspects of the product")
+    highlights: Optional[Dict[str, Any]] = Field(None, description="Key features, specifications, or notable aspects")
     score: Optional[float] = Field(0.0, description="The rating/score of the product (0.0-10.0)")
     price_range: Optional[str] = Field(None, description="Price range or cost information")
-    brand: Optional[str] = Field(None, description="Brand or manufacturer of the product")
+    brand: Optional[str] = Field(None, description="Brand or manufacturer")
     category: Optional[str] = Field(None, description="Product category or type")
 
-
 class ListProductTemplate(BaseModel):
-    """A list of product reviews/analyses."""
+    """
+    A list of product reviews/analyses.
+    """
     products: List[ProductTemplate] = Field(..., description="List of individual product reviews/analyses")
 
 
