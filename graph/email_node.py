@@ -17,26 +17,72 @@ MAIL = os.getenv("EMAIL_USERNAME", "akhilakmgb@gmail.com")
 PASSWORD = os.getenv("EMAIL_PASSWORD", "cqcc lhus jlnd ouii")
 
 email_html_template = """
-            
-                {heading}
-            
-            
-                Our Top Pick: {product_name}
-                {justification}
-                Watch our in-depth review to explore why this phone is the best choice for you:
-                Watch the Review
-            
-            
-                
-                    Want to learn more? Visit our website or follow us for more recommendations.
-                    Explore Now
-                
-                © 2025 ShopeGenie Recommendations, All Rights Reserved.
-            
-        
-    
-    
-    """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Email Recommendation</title>
+  <style>
+    body {{
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }}
+    .container {{
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      color: #333333;
+    }}
+    h1 {{
+      color: #4a90e2;
+    }}
+    .button {{
+      display: inline-block;
+      background-color: #4a90e2;
+      color: white !important;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      margin: 15px 0;
+      font-weight: bold;
+    }}
+    .footer {{
+      font-size: 12px;
+      color: #999999;
+      text-align: center;
+      margin-top: 30px;
+      border-top: 1px solid #dddddd;
+      padding-top: 15px;
+    }}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>{heading}</h1>
+
+    <p><strong>Our Top Pick:</strong> {product_name}</p>
+    <p>{justification}</p>
+
+    <p>Watch our in-depth review to explore why this phone is the best choice for you:</p>
+    <p><a href="{youtube_link}" class="button">Watch the Review</a></p>
+
+    <p>Want to learn more? Visit our website or follow us for more recommendations.</p>
+    <p><a href="#" class="button">Explore Now</a></p>
+
+    <div class="footer">
+      &copy; 2025 ShopeGenie Recommendations, All Rights Reserved.
+    </div>
+  </div>
+</body>
+</html>
+"""
+
+
 
 email_prompt = """
 You are an expert email content writer.
