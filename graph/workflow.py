@@ -37,7 +37,7 @@ display(Image(graph.get_graph().draw_mermaid_png()))
 
 def trigger_graph(query_id: int, query: str, email: str):
     for event in graph.stream(input=dict(query_id=query_id, query=query, email=email), stream_mode="updates"):
-        print(event)
+        print("\n\n\n", event)
 
 
 # initial_state = {"query_id": 1, "query": "Best smartphones under $10000", "email": "akhilakmgb@gmail.com"}
