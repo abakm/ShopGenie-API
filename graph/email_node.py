@@ -13,8 +13,8 @@ from models import State, EmailRecommendation
 
 SERVER = "smtp.gmail.com"
 PORT = 587
-MAIL = os.getenv("EMAIL_USERNAME", "akhilakmgb@gmail.com")
-PASSWORD = os.getenv("EMAIL_PASSWORD", "cqcc lhus jlnd ouii")
+MAIL = os.getenv("EMAIL_USERNAME", "genieshop188@gmail.com")
+PASSWORD = os.getenv("EMAIL_PASSWORD", "pzjm ucsw uygm ihla")
 
 email_html_template = """
 <!DOCTYPE html>
